@@ -28,7 +28,9 @@ function update_script() {
     exit
   fi
 
-  RELEASE=$(curl -fsSL https://api.github.com/repos/monicahq/monica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
+  # Hardcoded to latest beta release
+  RELEASE="5.0.0-beta.5"
+  #RELEASE=$(curl -fsSL https://api.github.com/repos/monicahq/monica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
   if [[ ! -f ~/.monica ]] || [[ "${RELEASE}" != "$(cat ~/.monica)" ]]; then
     msg_info "Stopping Service"
     systemctl stop apache2
