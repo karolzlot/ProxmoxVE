@@ -41,7 +41,8 @@ function update_script() {
     msg_ok "Backup created"
     msg_info "debug1: 5.0.0-beta.5" 
     msg_info "debug2: $RELEASE"  
-    fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
+    #fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
+    fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "v5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
 
     msg_info "Configuring monica"    
     cd /opt/monica/
