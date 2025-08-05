@@ -33,7 +33,8 @@ $STD mariadb -u root -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost'; FLUS
 } >>~/monica.creds
 msg_ok "Set up MariaDB"
 
-fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "latest" "/opt/monica" "monica-v*.tar.bz2"
+# fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "latest" "/opt/monica" "monica-v*.tar.bz2"
+fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "v5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
 
 msg_info "Configuring monica"
 cd /opt/monica
