@@ -5,7 +5,7 @@ source <(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxV
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://www.monicahq.com/
 
-APP="Monica"
+APP="Monica-beta"
 var_tags="${var_tags:-network}"
 var_cpu="${var_cpu:-2}"
 var_ram="${var_ram:-2048}"
@@ -29,7 +29,6 @@ function update_script() {
   fi
 
   # Hardcoded to latest beta release
-  # RELEASE=$(curl -fsSL https://api.github.com/repos/monicahq/monica/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
   RELEASE="5.0.0-beta.5"
   if [[ ! -f ~/.monica ]] || [[ "${RELEASE}" != "$(cat ~/.monica)" ]]; then
     msg_info "Stopping Service"
@@ -39,9 +38,8 @@ function update_script() {
     msg_info "Creating backup"
     mv /opt/monica/ /opt/monica-backup
     msg_ok "Backup created"
-    msg_info "debug1: 5.0.0-beta.5" 
-    msg_info "debug2: $RELEASE"  
-    # fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
+
+    # Hardcoded to latest beta release
     fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "v5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
 
     msg_info "Configuring monica"    
