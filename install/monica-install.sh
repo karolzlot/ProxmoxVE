@@ -46,7 +46,8 @@ sed -i -e "s|^DB_USERNAME=.*|DB_USERNAME=${DB_USER}|" \
   /opt/monica/.env
 $STD composer install --no-dev -o --no-interaction
 $STD yarn install
-$STD yarn run production
+$STD yarn run build
+$STD yarn run dev
 $STD php artisan key:generate
 $STD php artisan setup:production --email=admin@helper-scripts.com --password=helper-scripts.com --force
 chown -R www-data:www-data /opt/monica
