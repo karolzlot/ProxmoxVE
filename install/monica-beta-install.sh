@@ -13,7 +13,7 @@ setting_up_container
 network_check
 update_os
 
-PHP_VERSION="8.2" PHP_APACHE="YES" PHP_MODULE="dom,gmp,iconv,mysqli,pdo-mysql,redis,tokenizer" setup_php
+PHP_VERSION="8.3" PHP_APACHE="YES" PHP_MODULE="dom,gmp,iconv,mysqli,pdo-mysql,redis,tokenizer" setup_php
 setup_composer
 setup_mariadb
 NODE_VERSION="20" NODE_MODULE="yarn@latest" setup_nodejs
@@ -33,7 +33,8 @@ $STD mariadb -u root -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost'; FLUS
 } >>~/monica.creds
 msg_ok "Set up MariaDB"
 
-fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "latest" "/opt/monica" "monica-v*.tar.bz2"
+# fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "latest" "/opt/monica" "monica-v*.tar.bz2"
+fetch_and_deploy_gh_release "monica" "monicahq/monica" "prebuild" "v5.0.0-beta.5" "/opt/monica" "monica-v*.tar.bz2"
 
 msg_info "Configuring monica"
 cd /opt/monica
@@ -45,7 +46,8 @@ sed -i -e "s|^DB_USERNAME=.*|DB_USERNAME=${DB_USER}|" \
   /opt/monica/.env
 $STD composer install --no-dev -o --no-interaction
 $STD yarn install
-$STD yarn run production
+$STD yarn run build
+$STD yarn run dev
 $STD php artisan key:generate
 $STD php artisan setup:production --email=admin@helper-scripts.com --password=helper-scripts.com --force
 chown -R www-data:www-data /opt/monica
